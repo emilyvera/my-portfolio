@@ -1,112 +1,279 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
-}
-
-#greeting-container {
-  margin-top: 20px;
-}
-
 #background-block {
     background-color: #e897c3 ;
+    margin-top: -34px;
+    padding-bottom: 400px;
+    width: 100%;
 }
 
 .logo {
-  position: absolute;
-  left: 15px;
-  top: 105px;
+    left: 15px;
+    position: absolute;
+    top: 105px;
 }
 
-.headshot {
+.icon {
+    margin-top: 15%;
+}
+
+.bitmoji-headshot {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin: 30px auto;
 }
 
-.h1 { 
-    font-family: "Rockwell Extra Bold", "Rockwell Bold", monospace; 
-    font-size: 40px; 
-    font-style: normal; 
-    font-variant: normal; 
-    font-weight: 700; 
-    line-height: 42.4px; 
-    white-space: nowrap;
+.real-headshot {
+    margin-left: 200px;
+    margin-top: 100px;
+}
+
+h1 { 
+    font: normal normal 700 40px/42.4px 'Rockwell Extra Bold', 'Rockwell Bold', monospace; 
     margin-top: 115px;
+    white-space: nowrap;
 }
 
-.h3 { 
-    font-family: Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
-    font-size: 20px; 
-    font-style: normal; 
-    font-variant: normal; 
-    font-weight: 100; 
-    line-height: 21.4px; 
+h2 { 
+    color: white;
+    font: normal normal 700 30px/32.4px 'Rockwell Extra Bold', 'Rockwell Bold';
+    padding-top: 115px;
     white-space: nowrap;
+}
+
+h3 { 
+    font: normal normal 100 20px/21.4px Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
     margin-top: 30px;
+    white-space: nowrap;
+}
+
+h4 { 
+    color: black;
+    font: normal normal 100 25px/21.4px Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
+    margin-top: 30px;
+    white-space: nowrap;
+}
+
+p.white {   
+    color: white;  
+    font: normal normal 400 20px/26px 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+}
+
+p.light-pink { 
+    color:#e897c3;
+    font: normal normal 400 20px/26px 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+}
+
+p.overview { 
+    color:gray;
+    font: normal normal 400 15px/21px 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+}
+
+p.field { 
+    color:#cf69a0;
+    font: normal normal 400 17px/23px 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+}
+
+.aboutme-block {
+    padding: 70px 20% 10px 10%;
+    text-align: center;
 }
 
 .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
+.text-center {
+    display: block;
+    padding: 0px 10% 9% 10%;
+    text-align: center;
+}
 
+.two-column-left {
+    float: left;
+    width: 50%;
+}
+
+.two-column-right {
+    float: left;
+    padding-left: -15%;
+    width: 40%;
+}
+
+.three-column-uniform {
+    float: left;
+    padding-top: 5%;
+    width: 33%;
+}
+
+.five-column {
+    float: left;
+    padding-top: 3%;
+    width: 20%;
+}
+
+.social-media:hover {
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.projects:hover {
+    opacity: 0.6;
+    transition: 0.3s;
+    -webkit-tap-highlight-color: #e897c3;
+}
+
+.project-description {
+    visibility:hidden;
+}
+
+.projects {
+    border-radius: 15px;
+}
+
+.three-column-left {
+    background-color: white;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    box-shadow: 0 0 1pt 0.5pt #d5d1d1;
+    float: left;
+    margin-top: -300px;
+    padding-bottom: 3%;
+    width: 30%;
+}
+
+.three-column-middle {
+    background-color: white;
+    box-shadow: 0 0 1pt 0.5pt #d5d1d1;
+    float: left;
+    margin-top: -300px;
+    padding-bottom: 3%;
+    width: 30%;
+}
+
+.three-column-right {
+    background-color: white;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 0 0 1pt 0.5pt #d5d1d1;
+    float: left;
+    margin-top: -300px;
+    padding-bottom: 3%;
+    width: 30%;
+}
+
+.row2 {
+    margin-left: 9%;
+    padding-bottom: 37%;
+}
+
+.row3 {
+    padding-bottom: 30%;
+    padding-left: 5%;
+    padding-right:5%;
+}
+
+.row:after {
+    clear: both;
+    content: '';
+    display: table;
+}
+
+/* Banner code */
 /* Style the header with a grey background and some padding */
 .header {
-  overflow: hidden;
-  background-color: #f1f1f1;
-  padding: 20px 10px;
+    background-color: #f1f1f1;
+    background-image: url(https://wallpaperaccess.com/full/1425559.jpg); 
+    background-size: cover;
+    overflow: hidden;
+    padding: 20px 10px;
 }
 
 /* Style the header links */
 .header a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 25px;
-  border-radius: 4px;
+    border-radius: 4px;
+    color: black;
+    float: left;
+    font-size: 18px;
+    line-height: 25px;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
 }
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
-  font-size: 25px;
-  font-weight: bold;
+    font-size: 25px;
+    font-weight: bold;
 }
 
 /* Change the background color on mouse-over */
 .header a:hover {
-  background-color: white;
-  color: black;
+    background-color: white;
+    color: black;
 }
 
 /* Style the active/current link*/
 .header a.active {
-  background-color: white;
-  color: black;
+    background-color: white;
+    color: black;
 }
 
 /* Float the link section to the right */
 .header-right {
-  float: right;
+   float: right;
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 @media screen and (max-width: 500px) {
   .header a {
-    float: none;
-    display: block;
-    text-align: left;
+      display: block; 
+      float: none;
+      text-align: left;
   }
   .header-right {
-    float: none;
+      float: none;
   }
 }
+
+/* Banner code */
+
+/* Hover animation code */
+.container {
+    position: relative;
+}
+
+.image {
+    backface-visibility: hidden;
+    display: block;
+    opacity: 1;
+    transition: .5s ease;
+}
+
+.middle {
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: .5s ease;
+}
+
+.container:hover .image {
+    opacity: 0.3;
+}
+
+.container:hover .middle {
+    opacity: 1;
+}
+
+.text {
+    background-color: #e897c3;
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
+}
+
+/* Hover animation code */
