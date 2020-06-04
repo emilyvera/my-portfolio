@@ -5,12 +5,6 @@
     width: 100%;
 }
 
-/* .responsive-col {
-  -webkit-column-count: 2 100px;
-  -moz-column-count: 2 100px;
-  column-count: 2 100px;
-} */
-
 /* Create two equal columns that floats next to each other */
 .columnx {
     float: left;
@@ -41,30 +35,29 @@
 
 .bitmoji-headshot {
     display: block;
-    margin: 30px auto;
+    margin: 50px auto;
 }
 
 .real-headshot {
     max-width: 50%;
-    max-height:50%;
+    max-height: 50%;
+    margin-left: 40%;
 }
 
 h1 { 
-    font: normal normal 700 40px/42.4px 'Rockwell Extra Bold', 'Rockwell Bold', monospace; 
+    font: normal normal 700 3vw/5.4vw 'Rockwell Extra Bold', 'Rockwell Bold', monospace; 
     margin-top: 115px;
     white-space: nowrap;
 }
 
 h2 { 
     color: white;
-    font: normal normal 700 30px/32.4px 'Rockwell Extra Bold', 'Rockwell Bold';
-    /* padding-top: 115px; */
+    font: normal normal 700 2.3vw/4.4px 'Rockwell Extra Bold', 'Rockwell Bold';
     white-space: nowrap;
 }
 
 h3 { 
-    font: normal normal 100 20px/21.4px Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
-    /* margin-top: 30px; */
+    font: normal normal 100 1.6vw/2px Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
     white-space: nowrap;
 }
 
@@ -82,7 +75,7 @@ h5 {
 
 p.white {   
     color: white;  
-    font: normal normal 400 20px/26px 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+    font: normal normal 400 1.3vw/1.5vw 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
 }
 
 p.light-pink { 
@@ -104,6 +97,7 @@ p.field {
     padding-left: 5%;
     padding-right: 5%;
     text-align: center;
+    padding-top: 5%;
 }
 
 .center {
@@ -171,6 +165,8 @@ p.field {
 
 .projects {
     border-radius: 15px;
+    /* width:0%;
+    height: 0%; */
 }
 
 .three-column-left {
@@ -389,7 +385,7 @@ html {
   background-color: #0099cc;
 }
 
-/** PLSSSS */
+/** Courtesy of https://matthewjamestaylor.com/blog/equal-height-columns-2-column.htm*/
 #container2 {
     clear: left;
     float: left;
@@ -400,8 +396,8 @@ html {
     float: left;
     width: 100%;
     position: relative;
-    right: 50%;
-    display: flex;               /* establish flex container */
+    right: 55%;
+    display: flex;             
     align-items: center;
 }
 #col1 {
@@ -410,7 +406,7 @@ html {
     position: relative;
     left: 52%;
     overflow: hidden;
-    margin-top: 3%;
+    margin-top: 7%;
 }
 #col2 {
     float: left;
@@ -418,7 +414,7 @@ html {
     position: relative;
     left: 56%;
     overflow: hidden;
-    margin-top: 5%;
+    margin-top: 7%;
 }
 
 .vertical-center {
@@ -427,4 +423,45 @@ html {
     /* transform: translateY(-50%); */
     width: 50%;
 }
+
+/* Test */
+
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding-bottom: 5%;
+  padding-left: 5%;
+  padding-right:5%;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  -ms-flex: 33%; /* IE10 */
+  flex: 33%;
+  max-width: 33%;
+  padding-left: 2%;
+  padding-right:2%;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
 
