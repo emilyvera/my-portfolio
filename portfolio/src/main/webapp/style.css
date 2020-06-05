@@ -1,216 +1,221 @@
 .background-block {
-    background-color: #e897c3 ;
-    margin-top: -34px;
-    padding-bottom: 400px;
-    width: 100%;
+  background-color: #e897c3;
+  margin-top: -34px;
+  padding-bottom: 400px;
+  width: 100%;
 }
 
 .logo {
-    left: 15px;
-    position: absolute;
-    top: 105px;
+  left: 15px;
+  position: absolute;
+  top: 105px;
 }
 
 .icon {
-    margin-top: 15%;
+  margin-top: 15%;
 }
 
 .bitmoji-headshot {
-    display: block;
-    margin: 50px auto;
+  display: block;
+  margin: 50px auto;
 }
 
 .real-headshot {
-    max-width: 50%;
-    max-height: 50%;
-    margin-left: 40%;
+  max-width: 50%;
+  max-height: 50%;
+  margin-left: 40%;
 }
 
-h1 { 
-    font: normal normal 700 3vw/5.4vw 'Rockwell Extra Bold', 'Rockwell Bold', monospace; 
-    margin-top: 115px;
-    white-space: nowrap;
+h1 {
+  font: normal normal 700 3vw/5.4vw "Rockwell Extra Bold", "Rockwell Bold",
+    monospace;
+  margin-top: 115px;
+  white-space: nowrap;
 }
 
-h2 { 
-    color: white;
-    font: normal normal 700 2.3vw/4.4px 'Rockwell Extra Bold', 'Rockwell Bold';
-    white-space: nowrap;
+h2 {
+  color: white;
+  font: normal normal 700 2.3vw/4.4px "Rockwell Extra Bold", "Rockwell Bold";
+  white-space: nowrap;
 }
 
-h3 { 
-    font: normal normal 100 1.6vw/2px Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
-    white-space: nowrap;
+h3 {
+  font: normal normal 100 1.6vw/2px Rockwell, "Courier Bold", Courier, Georgia,
+    Times, "Times New Roman", serif;
+  white-space: nowrap;
 }
 
-h4 { 
-    color: black;
-    font: normal normal 100 25px/21.4px Rockwell, 'Courier Bold', Courier, Georgia, Times, 'Times New Roman', serif;
-    margin-top: 30px;
-    white-space: nowrap;
+h4 {
+  color: black;
+  font: normal normal 100 25px/21.4px Rockwell, "Courier Bold", Courier, Georgia,
+    Times, "Times New Roman", serif;
+  margin-top: 30px;
+  white-space: nowrap;
 }
 
-h5 { 
-    font: normal normal 700 40px/0px 'Rockwell Extra Bold', 'Rockwell Bold', monospace; 
-    white-space: nowrap;
+h5 {
+  font: normal normal 700 40px/42px "Rockwell Extra Bold", "Rockwell Bold",
+    monospace;
+  white-space: nowrap;
 }
 
-p.white {   
-    color: white;  
-    font: normal normal 400 1.3vw/1.5vw 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+.white-text {
+  color: white;
+  font: normal normal 400 1.3vw/1.5vw "Rockwell Extra Bold", "Rockwell Bold",
+    monospace;
 }
 
-p.overview { 
-    color:gray;
-    font: normal normal 400 15px/21px 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+.overview-text {
+  color: gray;
+  font: normal normal 400 15px/21px "Rockwell Extra Bold", "Rockwell Bold",
+    monospace;
 }
 
-p.field { 
-    color:#cf69a0;
-    font: normal normal 400 17px/23px 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+.field-text {
+  color: #cf69a0;
+  font: normal normal 400 17px/23px "Rockwell Extra Bold", "Rockwell Bold",
+    monospace;
 }
 
 .aboutme-block {
-    padding-left: 10%;
-    padding-right: 10%;
-    text-align: center;
-    padding-top: 5%;
+  padding: 5% 10% 0% 10%;
+  text-align: center;
 }
 
 .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .text-center {
-    display: block;
-    padding: 0px 10% 9% 10%;
-    text-align: center;
+  display: block;
+  padding: 0px 10% 9% 10%;
+  text-align: center;
 }
 
 .two-column-uniform {
-    float: left;
-    width: 50%;
+  float: left;
+  width: 50%;
 }
 
 .five-column {
-    float: left;
-    padding-top: 3%;
-    width: 20%;
+  float: left;
+  padding-top: 3%;
+  width: 20%;
 }
 
 .social-media:hover {
-    opacity: 0.5;
-    transition: 0.3s;
+  opacity: .5;
+  transition: .3s;
 }
 
 .projects:hover {
-    opacity: 0.6;
-    transition: 0.3s;
-    -webkit-tap-highlight-color: #e897c3;
+  opacity: .6;
+  transition: .3s;
+  -webkit-tap-highlight-color: #e897c3;
 }
 
 .projects {
-    border-radius: 15px;
+  border-radius: 15px;
 }
 
 .three-column-left {
-    background-color: white;
-    border-bottom-left-radius: 15px;
-    border-top-left-radius: 15px;
-    box-shadow: 0 0 1pt 0.5pt #d5d1d1;
-    float: left;
-    padding-bottom: 3%;
-    width: 30%;
+  background-color: white;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+  box-shadow: 0 0 1pt .5pt #d5d1d1;
+  float: left;
+  padding-bottom: 3%;
+  width: 30%;
 }
 
 .three-column-middle {
-    background-color: white;
-    box-shadow: 0 0 1pt 0.5pt #d5d1d1;
-    float: left;
-    padding-bottom: 3%;
-    width: 30%;
+  background-color: white;
+  box-shadow: 0 0 1pt .5pt #d5d1d1;
+  float: left;
+  padding-bottom: 3%;
+  width: 30%;
 }
 
 .three-column-right {
-    background-color: white;
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 15px;
-    box-shadow: 0 0 1pt 0.5pt #d5d1d1;
-    float: left;
-    padding-bottom: 3%;
-    width: 30%;
+  background-color: white;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  box-shadow: 0 0 1pt .5pt #d5d1d1;
+  float: left;
+  padding-bottom: 3%;
+  width: 30%;
 }
 
 .overview-container {
-    padding-left: 9%;
-    margin-top: -350px;
-    overflow:auto;
-    padding-bottom: 5%;
+  padding-left: 9%;
+  margin-top: -350px;
+  overflow: auto;
+  padding-bottom: 5%;
 }
 
 .pink-row {
-    background-color: #e897c3;
-    padding-bottom: 3%;
-    margin-top: 5%;
+  background-color: #e897c3;
+  padding-bottom: 3%;
+  margin-top: 5%;
 }
 
 .pink-row:after {
-    clear: both;
-    content: '';
-    display: table;
+  clear: both;
+  content: "";
+  display: table;
 }
 
 /* Banner code */
 /* Style the header with a grey background and some padding */
 .header {
-    background-color: #f1f1f1;
-    background-image: url(https://wallpaperaccess.com/full/1425559.jpg); 
-    background-size: cover;
-    overflow: hidden;
-    padding: 20px 10px;
+  background-color: #f1f1f1;
+  background-image: url(https://wallpaperaccess.com/full/1425559.jpg);
+  background-size: cover;
+  overflow: hidden;
+  padding: 20px 10px;
 }
 
 /* Style the header links */
 .header a {
-    border-radius: 4px;
-    color: black;
-    float: left;
-    font-size: 18px;
-    line-height: 25px;
-    padding: 12px;
-    text-align: center;
-    text-decoration: none;
+  border-radius: 4px;
+  color: black;
+  float: left;
+  font-size: 18px;
+  line-height: 25px;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
 }
 
 /* Change the background color on mouse-over */
 .header a:hover {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }
 
 /* Style the active/current link*/
 .header a.active {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }
 
 /* Float the link section to the right */
 .header-right {
-   float: right;
+  float: right;
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 @media screen and (max-width: 500px) {
   .header a {
-      display: block; 
-      float: none;
-      text-align: left;
+    display: block;
+    float: none;
+    text-align: left;
   }
   .header-right {
-      float: none;
+    float: none;
   }
   .three-column-uniform {
     width: 100%;
@@ -221,82 +226,81 @@ p.field {
 
 /* Hover animation code */
 .container {
-    position: relative;
+  position: relative;
 }
 
 .image {
-    backface-visibility: hidden;
-    display: block;
-    opacity: 1;
-    transition: .5s ease;
+  backface-visibility: hidden;
+  display: block;
+  opacity: 1;
+  transition: .5s ease;
 }
 
 .middle {
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    opacity: 0;
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    transition: .5s ease;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  opacity: 0;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: .5s ease;
 }
 
 .container:hover .image {
-    opacity: 0.3;
+  opacity: .3;
 }
 
 .container:hover .middle {
-    opacity: 1;
+  opacity: 1;
 }
 
 .text {
-    background-color: #e897c3;
-    color: white;
-    font-size: 16px;
-    padding: 16px 32px;
+  background-color: #e897c3;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
 }
 
 /* Hover animation code */
 
-
 /** Courtesy of https://matthewjamestaylor.com/blog/equal-height-columns-2-column.htm*/
 #container2 {
-    clear: left;
-    float: left;
-    width: 100%;
-    overflow: hidden;
+  clear: left;
+  float: left;
+  width: 100%;
+  overflow: hidden;
 }
 #container1 {
-    float: left;
-    width: 100%;
-    position: relative;
-    right: 55%;
-    display: flex;             
-    align-items: center;
+  float: left;
+  width: 100%;
+  position: relative;
+  right: 55%;
+  display: flex;
+  align-items: center;
 }
 #col1 {
-    float: left;
-    width: 46%;
-    position: relative;
-    left: 52%;
-    overflow: hidden;
-    margin-top: 7%;
+  float: left;
+  width: 46%;
+  position: relative;
+  left: 52%;
+  overflow: hidden;
+  margin-top: 7%;
 }
 #col2 {
-    float: left;
-    width: 46%;
-    position: relative;
-    left: 56%;
-    overflow: hidden;
-    margin-top: 7%;
+  float: left;
+  width: 46%;
+  position: relative;
+  left: 56%;
+  overflow: hidden;
+  margin-top: 7%;
 }
 
 .vertical-center {
-    position: relative;
-    top: 50%;
-    /* transform: translateY(-50%); */
-    width: 50%;
+  position: relative;
+  top: 50%;
+  /* transform: translateY(-50%); */
+  width: 50%;
 }
 
 * {
@@ -309,11 +313,11 @@ p.field {
   -ms-flex-wrap: wrap; /* IE10 */
   flex-wrap: wrap;
   padding-left: 5%;
-  padding-right:5%;
+  padding-right: 5%;
 }
 
 .row::after {
-  content: '';
+  content: "";
   clear: both;
   display: table;
 }
@@ -324,7 +328,7 @@ p.field {
   flex: 33%;
   max-width: 33%;
   padding-left: 2%;
-  padding-right:2%;
+  padding-right: 2%;
 }
 
 .column img {
@@ -341,5 +345,3 @@ p.field {
     max-width: 100%;
   }
 }
-
-

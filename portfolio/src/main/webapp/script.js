@@ -17,7 +17,7 @@
 //  */
 // function addRandomGreeting() {
 //   const greetings =
-//       ['I am 20 years old!', 'My favorite color is pink!', 
+//       ['I am 20 years old!', 'My favorite color is pink!',
 //       'I am in Phi Sigma Sigma!', 'I used to work at John Deere!',
 //       'I am outdoorsy!', 'My favorite race is the 5k!',
 //       'I have done other Google programs before!'];
@@ -63,31 +63,33 @@
 
 /** Fetches comments from the server and adds them to the DOM. */
 function loadComments() {
-  const value = document.getElementById('num-comments').value;
-  fetch(`/list-comments?num-comments=${value}`).then(response => response.json()).then((comments) => {
-    const oldComments = document.getElementById("comment-list");
-    while (oldComments.hasChildNodes()) {  
+  const value = document.getElementById("num-comments").value;
+  fetch(`/list-comments?num-comments=${value}`)
+    .then((response) => response.json())
+    .then((comments) => {
+      const oldComments = document.getElementById("comment-list");
+      while (oldComments.hasChildNodes()) {
         oldComments.removeChild(oldComments.firstChild);
-    }
+      }
 
-    const commentListElement = document.getElementById('comment-list');
-    comments.forEach((comment) => {
-      commentListElement.appendChild(createCommentElement(comment));
-    })
-  });
+      const commentListElement = document.getElementById("comment-list");
+      comments.forEach((comment) => {
+        commentListElement.appendChild(createCommentElement(comment));
+      });
+    });
 }
 
 /** Creates an element that represents a comment, including its delete button. */
 function createCommentElement(comment) {
-  const commentElement = document.createElement('li');
-  commentElement.className = 'comment';
+  const commentElement = document.createElement("li");
+  commentElement.className = "comment";
 
-  const titleElement = document.createElement('span');
+  const titleElement = document.createElement("span");
   titleElement.innerText = comment.message;
 
-  const deleteButtonElement = document.createElement('button');
-  deleteButtonElement.innerText = 'Delete';
-  deleteButtonElement.addEventListener('click', () => {
+  const deleteButtonElement = document.createElement("button");
+  deleteButtonElement.innerText = "Delete";
+  deleteButtonElement.addEventListener("click", () => {
     deleteComment(comment);
 
     // Remove the comment from the DOM.
@@ -102,12 +104,11 @@ function createCommentElement(comment) {
 /** Tells the server to delete the comment. */
 function deleteComment(comment) {
   const params = new URLSearchParams();
-  params.append('id', comment.id);
-  fetch('/delete-comment', {method: 'POST', body: params});
+  params.append("id", comment.id);
+  fetch("/delete-comment", { method: "POST", body: params });
 }
 
 function deleteAllComments() {
-  fetch('delete-all-comments', {method:'POST'});
+  fetch("delete-all-comments", { method: "POST" });
   document.getElementById("comment-list").remove();
 }
-
