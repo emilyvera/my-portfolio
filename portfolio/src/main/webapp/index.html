@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
-    <div class="header">
+  <body onload="loadComments()">
+      <div class="header">
         <div class="header-right">
             <a class="active" href="#home">Home</a>
             <a href="#about">About</a>
@@ -147,7 +147,7 @@
     <ul id="messages-container"></ul> -->
     <div class="pink-row">
         <div class="two-column-uniform">
-            <img src="/images/contact.png" alt="Contact icon" width="360" height="350" class="mid"> 
+            <img src="/images/contact.png" alt="Contact icon" width="360" height="350" class="vertical-center center"> 
         </div>
         <div class="two-column-uniform">
             <h5>Contact Me </h5>
@@ -169,5 +169,22 @@
             </form>
         </div>
     </div>
+    <hr/>
+
+    <label for="number">Choose how many comments you'd like to display:</label>
+
+    <select name="num-comments" id="num-comments" onchange="loadComments()">
+        <option value="0">0</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+    </select>
+
+    <ul id="comment-list"></ul>
+
+    <hr/>
+
+    <button onclick="deleteAllComments()">Delete all comments from datastore?</button>
   </body>
 </html>

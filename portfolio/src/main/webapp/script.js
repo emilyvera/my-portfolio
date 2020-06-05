@@ -36,27 +36,78 @@
 //   document.getElementById('txt-container').innerText = txt;
 // }
 
-function getMessages() {
-        console.log("Made it here 1");
-  fetch('/data').then(response => response.json()).then((messages) => {
-    // messages is an object, not a string, so we have to
-    // reference its fields to create HTML content
+// function getMessages() {
+//         console.log("Made it here 1");
+//   fetch('/data').then(response => response.json()).then((messages) => {
+//     // messages is an object, not a string, so we have to
+//     // reference its fields to create HTML content
 
-    console.log("Made it here 2");
+//     console.log("Made it here 2");
 
-    const messagesElement = document.getElementById('messages-container');
-    messagesElement.innerHTML = '';
-    messagesElement.appendChild(
-        createListElement('1: ' + messages[0]));
-    messagesElement.appendChild(
-        createListElement('2: ' + messages[1]));
-    messagesElement.appendChild(
-        createListElement('3: ' + messages[2]));
+//     const messagesElement = document.getElementById('messages-container');
+//     messagesElement.innerHTML = '';
+//     messagesElement.appendChild(
+//         createListElement('1: ' + messages[0]));
+//     messagesElement.appendChild(
+//         createListElement('2: ' + messages[1]));
+//     messagesElement.appendChild(
+//         createListElement('3: ' + messages[2]));
+//   });
+// }
+
+// function createListElement(text) {
+//   const liElement = document.createElement('li');
+//   liElement.innerText = text;
+//   return liElement;
+// }
+
+/** Fetches comments from the server and adds them to the DOM. */
+function loadComments() {
+  const value = document.getElementById('num-comments').value;
+  fetch(`/list-comments?num-comments=${value}`).then(response => response.json()).then((comments) => {
+    const oldComments = document.getElementById("comment-list");
+    while (oldComments.hasChildNodes()) {  
+        oldComments.removeChild(oldComments.firstChild);
+    }
+
+    const commentListElement = document.getElementById('comment-list');
+    comments.forEach((comment) => {
+      commentListElement.appendChild(createCommentElement(comment));
+    })
   });
 }
 
-function createListElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
-  return liElement;
+/** Creates an element that represents a comment, including its delete button. */
+function createCommentElement(comment) {
+  const commentElement = document.createElement('li');
+  commentElement.className = 'comment';
+
+  const titleElement = document.createElement('span');
+  titleElement.innerText = comment.message;
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.addEventListener('click', () => {
+    deleteComment(comment);
+
+    // Remove the comment from the DOM.
+    commentElement.remove();
+  });
+
+  commentElement.appendChild(titleElement);
+  commentElement.appendChild(deleteButtonElement);
+  return commentElement;
 }
+
+/** Tells the server to delete the comment. */
+function deleteComment(comment) {
+  const params = new URLSearchParams();
+  params.append('id', comment.id);
+  fetch('/delete-comment', {method: 'POST', body: params});
+}
+
+function deleteAllComments() {
+  fetch('delete-all-comments', {method:'POST'});
+  document.getElementById("comment-list").remove();
+}
+

@@ -5,24 +5,6 @@
     width: 100%;
 }
 
-/* Create two equal columns that floats next to each other */
-.columnx {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color:#bbb;
-    height: 100%;
-    padding-top: 100px;
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */ 
-@media screen and (max-width: 500px) {
-    .two-column-uniform {
-        width: 100%;
-    }
-}
-
 .logo {
     left: 15px;
     position: absolute;
@@ -94,8 +76,8 @@ p.field {
 }
 
 .aboutme-block {
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
     text-align: center;
     padding-top: 5%;
 }
@@ -107,34 +89,10 @@ p.field {
     text-align: center;
 }
 
-.mid {
-    display: block;
-    margin-top: 6%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
 .text-center {
     display: block;
     padding: 0px 10% 9% 10%;
     text-align: center;
-}
-
-.two-column-left {
-    float: left;
-    width: 50%;
-}
-
-.two-column-right {
-    float: left;
-    padding-left: -15%;
-    width: 40%;
-}
-
-.three-column-uniform {
-    float: left;
-    width: 33%;
 }
 
 .two-column-uniform {
@@ -159,14 +117,8 @@ p.field {
     -webkit-tap-highlight-color: #e897c3;
 }
 
-.project-description {
-    visibility:hidden;
-}
-
 .projects {
     border-radius: 15px;
-    /* width:0%;
-    height: 0%; */
 }
 
 .three-column-left {
@@ -204,12 +156,6 @@ p.field {
     padding-bottom: 5%;
 }
 
-.projects-container {
-    padding-bottom: 30%;
-    padding-left: 5%;
-    padding-right:5%;
-}
-
 .row:after {
     clear: both;
     content: '';
@@ -219,6 +165,7 @@ p.field {
 .pink-row {
     background-color: #e897c3;
     padding-bottom: 3%;
+    margin-top: 5%;
 }
 
 .pink-row:after {
@@ -334,11 +281,6 @@ p.field {
   display: table;
 }
 
-.rowx {
-    float: left;
-    width: 100%;
-}
-
 [class*="col-"] {
   float: left;
   padding: 15px;
@@ -359,12 +301,6 @@ p.field {
 
 html {
   font-family: "Lucida Sans", sans-serif;
-}
-
-.header {
-  background-color: #9933cc;
-  color: #ffffff;
-  padding: 15px;
 }
 
 .menu ul {
@@ -435,7 +371,6 @@ html {
   display: flex;
   -ms-flex-wrap: wrap; /* IE10 */
   flex-wrap: wrap;
-  padding-bottom: 5%;
   padding-left: 5%;
   padding-right:5%;
 }
