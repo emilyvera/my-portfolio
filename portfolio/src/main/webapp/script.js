@@ -12,20 +12,50 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['I am 20 years old!', 'My favorite color is pink!', 
-      'I am in Phi Sigma Sigma!', 'I used to work at John Deere!',
-      'I am outdoorsy!', 'My favorite race is the 5k!',
-      'I have done other Google programs before!'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+/** Fetches comments from the server and adds them to the DOM. */
+async function loadComments() {
+  const value = document.getElementById("num-comments").value;
+  const response = await fetch(`/list-comments?num-comments=${value}`);
+  const comments = await response.json();
+  const commentsDisplayed = document.getElementById("comment-list");
+  commentsDisplayed.innerHTML = '';
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  comments.forEach((comment) => {
+    commentsDisplayed.appendChild(createCommentElement(comment));
+  });
+}
+
+/** Creates an element that represents a comment, including its delete button. */
+function createCommentElement(comment) {
+  const commentElement = document.createElement("li");
+  commentElement.className = "comment";
+
+  const titleElement = document.createElement("span");
+  titleElement.innerText = comment.message;
+
+  const deleteButtonElement = document.createElement("button");
+  deleteButtonElement.innerText = "Delete";
+  deleteButtonElement.addEventListener("click", () => {
+    deleteComment(comment);
+
+    // Remove the comment from the DOM.
+    commentElement.remove();
+  });
+
+  commentElement.appendChild(titleElement);
+  commentElement.appendChild(deleteButtonElement);
+  return commentElement;
+}
+
+/** Tells the server to delete the comment. */
+function deleteComment(comment) {
+  const params = new URLSearchParams();
+  params.append("id", comment.id);
+  fetch("/delete-comment", { method: "POST", body: params });
+}
+
+function deleteAllComments() {
+  fetch("delete-all-comments", { method: "POST" });
+  document.getElementById("comment-list").remove();
 }

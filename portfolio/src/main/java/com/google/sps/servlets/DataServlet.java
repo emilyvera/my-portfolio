@@ -14,19 +14,44 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.sps.servlets.Comment;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+@WebServlet("/contact-me")
 public class DataServlet extends HttpServlet {
 
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello world!</h1>");
-  }
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Get the input from the form.
+        String name = request.getParameter("name-input");
+        String email = request.getParameter("email-input");
+        String subject = request.getParameter("subject-input");
+        String message = request.getParameter("message-input");
+
+        // Error handling - don't allow empty or null values
+        if (name != null && email != null && subject != null && message != null) {
+            if (!name.isEmpty() && !email.isEmpty() && !subject.isEmpty() && !message.isEmpty()) {
+              Entity commentEntity = new Entity("Comment");
+              commentEntity.setProperty("name", name);
+              commentEntity.setProperty("email", email);
+              commentEntity.setProperty("subject", subject);
+              commentEntity.setProperty("message", message);
+              DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+              datastore.put(commentEntity);
+            }
+        }
+
+        // Redirect back to the HTML page.
+        response.sendRedirect("/index.html");
+    }
 }
