@@ -29,14 +29,6 @@ import com.google.sps.servlets.Comment;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/contact-me")
 public class DataServlet extends HttpServlet {
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // response.setContentType("application/json;");
-        // String json = new Gson().toJson(comments);
-        // response.getWriter().println(json);
-    }
-
-    private static int numCommentsToDisplay;
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -46,26 +38,20 @@ public class DataServlet extends HttpServlet {
         String subject = request.getParameter("subject-input");
         String message = request.getParameter("message-input");
 
-        // Make sure it went through
-        System.out.println(name);
-        System.out.println(email);
-        System.out.println(subject);
-        System.out.println(message);
-
-        Entity commentEntity = new Entity("Comment");
-        commentEntity.setProperty("name", name);
-        commentEntity.setProperty("email", email);
-        commentEntity.setProperty("subject", subject);
-        commentEntity.setProperty("message", message);
-
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        datastore.put(commentEntity);
+        // Error handling - don't allow empty or null values
+        if (name != null && email != null && subject != null && message != null) {
+            if (!name.isEmpty() && !email.isEmpty() && !subject.isEmpty() && !message.isEmpty()) {
+              Entity commentEntity = new Entity("Comment");
+              commentEntity.setProperty("name", name);
+              commentEntity.setProperty("email", email);
+              commentEntity.setProperty("subject", subject);
+              commentEntity.setProperty("message", message);
+              DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+              datastore.put(commentEntity);
+            }
+        }
 
         // Redirect back to the HTML page.
         response.sendRedirect("/index.html");
-    }
-
-    static int getNumCommentsToDisplay() {
-        return numCommentsToDisplay;
     }
 }
