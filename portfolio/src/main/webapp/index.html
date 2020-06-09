@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <title>Emily's Portfolio</title>
     <link rel="stylesheet" href="style.css" />
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOWcwF4qHzd1v3ev-hmzliunh0Oaqg6RA"></script>
     <script src="script.js"></script>
   </head>
-  <body onload="loadComments()">
+  <body onload="initialize()">
     <div class="header">
       <div class="header-right">
         <a class="active" href="#home">Home</a>
@@ -243,6 +244,19 @@
             </div>
           </a>
         </div>
+      </div>
+    </div>
+    <h1 class="center">Check out some of my favorite locations!</h1>
+    <!-- <div class="map-container">
+      <div id="map"></div>
+      <div id="pano"></div>
+    </div> -->
+    <div class="row-r">
+      <div class="column-r">
+        <div id="map"></div>
+      </div>
+      <div class="column-r">
+        <div id="pano"></div>
       </div>
     </div>
     <!-- <h1>This has been added</h1>

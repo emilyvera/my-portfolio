@@ -1,3 +1,21 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map, #pano {
+  float: left;
+  height: 100%;
+  width: 100%;
+}
+
+.map-container {
+    width: 100%;
+    height: 100%;
+    margin: 25%;
+}
+
 .background-block {
   background-color: #e897c3;
   margin-top: -34px;
@@ -343,5 +361,28 @@ h5 {
     -ms-flex: 100%;
     flex: 100%;
     max-width: 100%;
+  }
+}
+
+.row-r::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.row-r {
+  margin:5%;
+}
+
+/* Create two equal columns that floats next to each other */
+.column-r {
+  float: left;
+  width: 50%;
+  height: 500px; /* Should be removed. Only for demonstration */
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .column-r {
+    width: 100%;
   }
 }
