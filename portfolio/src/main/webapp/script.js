@@ -12,8 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-var map;
-var locationsDict = new Object();
+let map;
+const locationsDict = new Object();
+
+class Location {
+  constructor(marker, lat, lng, header, pitch, infoString, infoWindow) {
+    this.marker = marker;
+    this.lat = lat;
+    this.lng = lng;
+    this.header = header;
+    this.pitch = pitch;
+    this.infoString = infoString;
+    this.infoWindow = infoWindow;
+  }
+}
 
 /** Calls all necessary functions to be called onLoad */
 function initialize() {
@@ -34,46 +46,43 @@ function createMap() {
 
 /** All setup code for markers. */
 function setupMarkers() {
-  locationsDict["Bean"] = {
-    m: null,
-    lat: 41.8826099,
-    lng: -87.6232902,
-    h: -7,
-    p: 22,
-    is:
-      '<p style="margin-top:-3px; margin-bottom:-3px" class="field-text">Cloud Gate</p>',
-    iw: null,
-  };
-  locationsDict["Skyline"] = {
-    m: null,
-    lat: 41.9147471,
-    lng: -87.6209924,
-    h: 185,
-    p: 17,
-    is:
-      '<p style="margin-top:-3px; margin-bottom:-3px" class="field-text">Photography Point</p>',
-    iw: null,
-  };
-  locationsDict["Riverwalk"] = {
-    m: null,
-    lat: 41.8877563,
-    lng: -87.6273952,
-    h: 125,
-    p: 30,
-    is:
-      '<p style="margin-top:-3px; margin-bottom:-3px" class="field-text">Chicago Riverwalk</p>',
-    iw: null,
-  };
+  locationsDict["Bean"] = new Location(
+    null,
+    41.8826099,
+    -87.6232902,
+    -7,
+    22,
+    '<p style="margin-top:-3px; margin-bottom:-3px" class="field-text">Cloud Gate</p>',
+    null
+  );
+  locationsDict["Skyline"] = new Location(
+    null,
+    41.9147471,
+    -87.6209924,
+    185,
+    17,
+    '<p style="margin-top:-3px; margin-bottom:-3px" class="field-text">Photography Point</p>',
+    null
+  );
+  locationsDict["Riverwalk"] = new Location(
+    null,
+    41.8877563,
+    -87.6273952,
+    125,
+    30,
+    '<p style="margin-top:-3px; margin-bottom:-3px" class="field-text">Chicago Riverwalk</p>',
+    null
+  );
 
-  for (var location in locationsDict) {
-    locationsDict[location].m = createMarker(locationsDict[location]);
-    locationsDict[location].iw = new google.maps.InfoWindow({
-      content: locationsDict[location].is,
+  for (const location in locationsDict) {
+    locationsDict[location].marker = createMarker(locationsDict[location]);
+    locationsDict[location].infoWindow = new google.maps.InfoWindow({
+      content: locationsDict[location].infoString,
     });
     addMarkerListeners(
-      locationsDict[location].m,
+      locationsDict[location].marker,
       location,
-      locationsDict[location].iw
+      locationsDict[location].infoWindow
     );
   }
 }
@@ -98,14 +107,14 @@ function addMarkerListeners(marker, place, infowindow) {
 }
 
 /** Change street view to position in positionTuple. */
-function changeView(positionTuple) {
-  var panorama = new google.maps.StreetViewPanorama(
+function changeView(location) {
+  const panorama = new google.maps.StreetViewPanorama(
     document.getElementById("pano"),
     {
-      position: { lat: positionTuple.lat, lng: positionTuple.lng },
+      position: { lat: location.lat, lng: location.lng },
       pov: {
-        heading: positionTuple.h,
-        pitch: positionTuple.p,
+        heading: location.header,
+        pitch: location.pitch,
       },
     }
   );
@@ -113,10 +122,9 @@ function changeView(positionTuple) {
 }
 
 /** Initialize and set up individual markers. */
-function createMarker(positionTuple) {
-  console.log("Created marker");
-  var tmp = new google.maps.Marker({
-    position: { lat: positionTuple.lat, lng: positionTuple.lng },
+function createMarker(location) {
+  const marker = new google.maps.Marker({
+    position: { lat: location.lat, lng: location.lng },
     animation: google.maps.Animation.DROP,
     map: map,
     icon: {
@@ -124,7 +132,7 @@ function createMarker(positionTuple) {
       scaledSize: new google.maps.Size(45, 45), //pixels
     },
   });
-  return tmp;
+  return marker;
 }
 
 /** Fetches comments from the server and adds them to the DOM. */
@@ -151,9 +159,9 @@ function createCommentElement(comment) {
   const deleteButtonElement = document.createElement("button");
   deleteButtonElement.innerText = "Delete";
   deleteButtonElement.addEventListener("click", () => {
-    deleteComment(comment); // Remove the comment from the DOM.
+    deleteComment(comment);
 
-    commentElement.remove();
+    commentElement.remove(); // Remove the comment from the DOM.
   });
 
   commentElement.appendChild(titleElement);

@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -37,11 +38,33 @@ public class ListDataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("message", SortDirection.DESCENDING);
+    int numCommentsToDisplay = getNumberOfComments(request);
+
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
+    List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(numCommentsToDisplay));
 
+    List<Comment> comments = new ArrayList<>();
+    for (Entity entity : results) {
+        long id = entity.getKey().getId(); 
+        String name = (String) entity.getProperty("name");
+        String email = (String) entity.getProperty("email");
+        String subject = (String) entity.getProperty("subject");
+        String message = (String) entity.getProperty("message");
+        long timestamp = (long) entity.getProperty("timestamp");
+
+        Comment comment = new Comment(id, name, email, subject, message, timestamp);
+        comments.add(comment);
+    }
+
+    Gson gson = new Gson();
+
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(comments));
+  }
+
+  int getNumberOfComments(HttpServletRequest request) {
     String numCommentsString = request.getParameter("num-comments");
 
     // Convert the input to an int.
@@ -52,29 +75,6 @@ public class ListDataServlet extends HttpServlet {
         System.err.println("Could not convert to int: " + numCommentsString);
         numComments = 0; //default val
     }
-
-    System.out.println("Num comments to show: " + numComments);
-
-    int numCommentsDisplayed = 0;
-
-    List<Comment> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
-        if (numCommentsDisplayed < numComments) {
-            long id = entity.getKey().getId(); 
-            String name = (String) entity.getProperty("name");
-            String email = (String) entity.getProperty("email");
-            String subject = (String) entity.getProperty("subject");
-            String message = (String) entity.getProperty("message");
-
-            Comment c = new Comment(id, name, email, subject, message);
-            comments.add(c);
-        }
-        numCommentsDisplayed++;
-    }
-
-    Gson gson = new Gson();
-
-    response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(comments));
+    return numComments;
   }
 }

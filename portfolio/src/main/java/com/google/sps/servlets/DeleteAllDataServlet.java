@@ -22,28 +22,25 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.common.collect.Iterables;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet responsible for deleting comments. */
+/** Servlet responsible for deleting all comments. */
 @WebServlet("/delete-all-comments")
 public class DeleteAllDataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("message", SortDirection.DESCENDING);
+    Query query = new Query("Comment");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    for (Entity entity : results.asIterable()) {
-        long id = entity.getKey().getId(); 
-        Key commentEntityKey = KeyFactory.createKey("Comment", id);
-        datastore.delete(commentEntityKey);
-        System.out.println("Deleted object with id: " + id);
-    }
+    Iterable keysToDelete = Iterables.transform(results.asIterable(), Entity::getKey); 
+    datastore.delete(keysToDelete);
   }
 }

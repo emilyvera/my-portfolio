@@ -37,6 +37,7 @@ public class DataServlet extends HttpServlet {
         String email = request.getParameter("email-input");
         String subject = request.getParameter("subject-input");
         String message = request.getParameter("message-input");
+        long timestamp = System.currentTimeMillis();
 
         // Error handling - don't allow empty or null values
         if (name != null && email != null && subject != null && message != null) {
@@ -46,6 +47,8 @@ public class DataServlet extends HttpServlet {
               commentEntity.setProperty("email", email);
               commentEntity.setProperty("subject", subject);
               commentEntity.setProperty("message", message);
+              commentEntity.setProperty("timestamp", timestamp);
+
               DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
               datastore.put(commentEntity);
             }
