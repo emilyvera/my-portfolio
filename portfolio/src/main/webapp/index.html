@@ -4,9 +4,14 @@
     <meta charset="utf-8" />
     <title>Emily's Portfolio</title>
     <link rel="stylesheet" href="style.css" />
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOWcwF4qHzd1v3ev-hmzliunh0Oaqg6RA"
+    ></script>
     <script src="script.js"></script>
   </head>
-  <body onload="loadComments()">
+  <body onload="initialize()">
     <div class="header">
       <div class="header-right">
         <a class="active" href="#home">Home</a>
@@ -195,7 +200,9 @@
         <p class="overview-text center">3 Hackathons</p>
         <p class="overview-text center">Girls Who Code Facilitator</p>
         <p class="overview-text center">Phi Sigma Sigma Sorority</p>
-        <p class="overview-text center">Society of Women Engineers: Team Tech</p>
+        <p class="overview-text center">
+          Society of Women Engineers: Team Tech
+        </p>
         <p class="overview-text center">Teaching Assistant</p>
       </div>
     </div>
@@ -245,14 +252,15 @@
         </div>
       </div>
     </div>
-    <!-- <h1>This has been added</h1>
-    <p>Click here to see the message!</p>
-    <button onclick="getText()">Fetch text!</button>
-    <div id="txt-container"></div> -->
-    <!-- <h1>Messages</h1>
-    <p>Click here to see messages from the server:</p>
-    <button onclick="getMessages()">Fetch messages!</button>
-    <ul id="messages-container"></ul> -->
+    <h1 class="center">Check out some of my favorite locations!</h1>
+    <div class="row-responsive">
+      <div class="column-responsive">
+        <div id="map"></div>
+      </div>
+      <div class="column-responsive">
+        <div id="pano"></div>
+      </div>
+    </div>
     <div class="pink-row">
       <div class="two-column-uniform">
         <img
@@ -267,16 +275,35 @@
         <h5>Contact Me</h5>
         <h3>Feel free to reach out with any questions!</h3>
         <form action="/contact-me" method="POST">
-          <input type="text" name="name-input" placeholder="Your Name" />
+          <input
+            type="text"
+            name="name-input"
+            placeholder="Your Name"
+            required
+          />
           <br /><br />
 
-          <input type="text" name="email-input" placeholder="Your Email" />
+          <input
+            type="text"
+            name="email-input"
+            placeholder="Your Email"
+            required
+          />
           <br /><br />
 
-          <input type="text" name="subject-input" placeholder="Subject" />
+          <input
+            type="text"
+            name="subject-input"
+            placeholder="Subject"
+            required
+          />
           <br /><br />
 
-          <textarea name="message-input" placeholder="Message"></textarea>
+          <textarea
+            name="message-input"
+            placeholder="Message"
+            required
+          ></textarea>
           <br /><br />
 
           <input type="submit" />
@@ -285,7 +312,9 @@
     </div>
     <hr />
 
-    <label for="num-comments">Choose how many comments you'd like to display:</label>
+    <label for="num-comments"
+      >Choose how many comments you'd like to display:</label
+    >
 
     <select name="num-comments" id="num-comments" onchange="loadComments()">
       <option value="0">0</option>

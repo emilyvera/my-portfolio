@@ -1,3 +1,23 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map,
+#pano {
+  float: left;
+  height: 100%;
+  width: 100%;
+}
+
+.map-container {
+  height: 100%;
+  margin: 25%;
+  width: 100%;
+}
+
 .background-block {
   background-color: #e897c3;
   margin-top: -34px;
@@ -21,9 +41,9 @@
 }
 
 .real-headshot {
-  max-width: 50%;
-  max-height: 50%;
   margin-left: 40%;
+  max-height: 50%;
+  max-width: 50%;
 }
 
 h1 {
@@ -77,6 +97,10 @@ h5 {
     monospace;
 }
 
+.marker {
+  margin: -1% 0%;
+}
+
 .aboutme-block {
   padding: 5% 10% 0% 10%;
   text-align: center;
@@ -107,13 +131,13 @@ h5 {
 }
 
 .social-media:hover {
-  opacity: .5;
-  transition: .3s;
+  opacity: 0.5;
+  transition: 0.3s;
 }
 
 .projects:hover {
-  opacity: .6;
-  transition: .3s;
+  opacity: 0.6;
+  transition: 0.3s;
   -webkit-tap-highlight-color: #e897c3;
 }
 
@@ -125,7 +149,7 @@ h5 {
   background-color: white;
   border-bottom-left-radius: 15px;
   border-top-left-radius: 15px;
-  box-shadow: 0 0 1pt .5pt #d5d1d1;
+  box-shadow: 0 0 1pt 0.5pt #d5d1d1;
   float: left;
   padding-bottom: 3%;
   width: 30%;
@@ -133,7 +157,7 @@ h5 {
 
 .three-column-middle {
   background-color: white;
-  box-shadow: 0 0 1pt .5pt #d5d1d1;
+  box-shadow: 0 0 1pt 0.5pt #d5d1d1;
   float: left;
   padding-bottom: 3%;
   width: 30%;
@@ -143,7 +167,7 @@ h5 {
   background-color: white;
   border-bottom-right-radius: 15px;
   border-top-right-radius: 15px;
-  box-shadow: 0 0 1pt .5pt #d5d1d1;
+  box-shadow: 0 0 1pt 0.5pt #d5d1d1;
   float: left;
   padding-bottom: 3%;
   width: 30%;
@@ -158,8 +182,8 @@ h5 {
 
 .pink-row {
   background-color: #e897c3;
-  padding-bottom: 3%;
   margin-top: 5%;
+  padding-bottom: 3%;
 }
 
 .pink-row:after {
@@ -233,7 +257,7 @@ h5 {
   backface-visibility: hidden;
   display: block;
   opacity: 1;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 
 .middle {
@@ -244,11 +268,11 @@ h5 {
   text-align: center;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 
 .container:hover .image {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .container:hover .middle {
@@ -268,32 +292,32 @@ h5 {
 #container2 {
   clear: left;
   float: left;
-  width: 100%;
   overflow: hidden;
+  width: 100%;
 }
 #container1 {
+  align-items: center;
+  display: flex;
   float: left;
-  width: 100%;
   position: relative;
   right: 55%;
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
 #col1 {
   float: left;
-  width: 46%;
-  position: relative;
   left: 52%;
-  overflow: hidden;
   margin-top: 7%;
+  overflow: hidden;
+  position: relative;
+  width: 46%;
 }
 #col2 {
   float: left;
-  width: 46%;
-  position: relative;
   left: 56%;
-  overflow: hidden;
   margin-top: 7%;
+  overflow: hidden;
+  position: relative;
+  width: 46%;
 }
 
 .vertical-center {
@@ -310,23 +334,23 @@ h5 {
 .row {
   display: -ms-flexbox; /* IE10 */
   display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
   flex-wrap: wrap;
+  -ms-flex-wrap: wrap; /* IE10 */
   padding-left: 5%;
   padding-right: 5%;
 }
 
 .row::after {
-  content: "";
   clear: both;
+  content: "";
   display: table;
 }
 
 /* Create four equal columns that sits next to each other */
 .column {
-  -ms-flex: 33%; /* IE10 */
   flex: 33%;
   max-width: 33%;
+  -ms-flex: 33%; /* IE10 */
   padding-left: 2%;
   padding-right: 2%;
 }
@@ -340,8 +364,31 @@ h5 {
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
   .column {
-    -ms-flex: 100%;
     flex: 100%;
     max-width: 100%;
+    -ms-flex: 100%;
+  }
+}
+
+.row-responsive::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.row-responsive {
+  margin: 5%;
+}
+
+/* Create two equal columns that floats next to each other */
+.column-responsive {
+  float: left;
+  height: 500px;
+  width: 50%;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .column-responsive {
+    width: 100%;
   }
 }
