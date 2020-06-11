@@ -98,7 +98,7 @@ h5 {
 }
 
 .marker {
-	margin: -1% 0%;
+  margin: -1% 0%;
 }
 
 .aboutme-block {
@@ -131,13 +131,13 @@ h5 {
 }
 
 .social-media:hover {
-  opacity: .5;
-  transition: .3s;
+  opacity: 0.5;
+  transition: 0.3s;
 }
 
 .projects:hover {
-  opacity: .6;
-  transition: .3s;
+  opacity: 0.6;
+  transition: 0.3s;
   -webkit-tap-highlight-color: #e897c3;
 }
 
@@ -149,7 +149,7 @@ h5 {
   background-color: white;
   border-bottom-left-radius: 15px;
   border-top-left-radius: 15px;
-  box-shadow: 0 0 1pt .5pt #d5d1d1;
+  box-shadow: 0 0 1pt 0.5pt #d5d1d1;
   float: left;
   padding-bottom: 3%;
   width: 30%;
@@ -157,7 +157,7 @@ h5 {
 
 .three-column-middle {
   background-color: white;
-  box-shadow: 0 0 1pt .5pt #d5d1d1;
+  box-shadow: 0 0 1pt 0.5pt #d5d1d1;
   float: left;
   padding-bottom: 3%;
   width: 30%;
@@ -167,7 +167,7 @@ h5 {
   background-color: white;
   border-bottom-right-radius: 15px;
   border-top-right-radius: 15px;
-  box-shadow: 0 0 1pt .5pt #d5d1d1;
+  box-shadow: 0 0 1pt 0.5pt #d5d1d1;
   float: left;
   padding-bottom: 3%;
   width: 30%;
@@ -257,7 +257,7 @@ h5 {
   backface-visibility: hidden;
   display: block;
   opacity: 1;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 
 .middle {
@@ -268,11 +268,11 @@ h5 {
   text-align: center;
   top: 50%;
   transform: translate(-50%, -50%);
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 
 .container:hover .image {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .container:hover .middle {

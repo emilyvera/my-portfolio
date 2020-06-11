@@ -40,7 +40,6 @@ public class DataServlet extends HttpServlet {
         String message = request.getParameter("message-input");
         long timestamp = System.currentTimeMillis();
 
-
         // Error handling - don't allow empty or null values
         if (!Strings.isNullOrEmpty(name) && !Strings.isNullOrEmpty(email) && !Strings.isNullOrEmpty(subject) && !Strings.isNullOrEmpty(message)) {
             Entity commentEntity = new Entity("Comment");

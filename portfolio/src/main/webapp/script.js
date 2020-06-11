@@ -16,7 +16,7 @@
  * Class to hold all data needed to create a new location on the map.
  */
 class Location {
-    /**
+  /**
    * @param {double} lat Latitude.
    * @param {double} lng Longitude.
    * @param {int} heading Camera rotation angle on the x-axis.
@@ -34,29 +34,28 @@ class Location {
 
 let map;
 const locationsDict = {
-  "Bean": new Location(
+  Bean: new Location(
     /* lat= */ 41.8826099,
     /* lng= */ -87.6232902,
     /* heading= */ -7,
     /* pitch= */ 22,
-    /* infoString= */ '<p class="field-text marker">Cloud Gate</p>',
+    /* infoString= */ '<p class="field-text marker">Cloud Gate</p>'
   ),
-  "Skyline": new Location(
+  Skyline: new Location(
     /* lat= */ 41.9147471,
     /* lng= */ -87.6209924,
     /* heading= */ 185,
     /* pitch= */ 17,
-    /* infoString= */ '<p class="field-text marker">Photography Point</p>',
+    /* infoString= */ '<p class="field-text marker">Photography Point</p>'
   ),
-  "Riverwalk": new Location(
+  Riverwalk: new Location(
     /* lat= */ 41.8877563,
     /* lng= */ -87.6273952,
     /* heading= */ 125,
     /* pitch= */ 30,
-    /* infoString= */ '<p class="field-text marker">Chicago Riverwalk</p>',
-  )
+    /* infoString= */ '<p class="field-text marker">Chicago Riverwalk</p>'
+  ),
 };
-
 
 /** Calls all necessary functions to be called onLoad */
 function initialize() {
@@ -81,11 +80,7 @@ function initializeMarkersAndView() {
     infoWindow = new google.maps.InfoWindow({
       content: locationsDict[location].infoString,
     });
-    addMarkerListeners(
-      marker,
-      location,
-      infoWindow
-    );
+    addMarkerListeners(marker, location, infoWindow);
   }
   changeView(locationsDict["Bean"]);
 }
@@ -144,7 +139,7 @@ async function loadComments() {
   const response = await fetch(`/list-comments?num-comments=${value}`);
   const comments = await response.json();
   const commentsDisplayed = document.getElementById("comment-list");
-  commentsDisplayed.innerHTML = '';
+  commentsDisplayed.innerHTML = "";
 
   comments.forEach((comment) => {
     commentsDisplayed.appendChild(createCommentElement(comment));
@@ -181,6 +176,6 @@ async function deleteComment(comment) {
 
 async function deleteAllComments() {
   await fetch("delete-all-comments", { method: "POST" });
-  const commentsDisplayed = document.getElementById("comment-list")
-  commentsDisplayed.innerHTML = '';
+  const commentsDisplayed = document.getElementById("comment-list");
+  commentsDisplayed.innerHTML = "";
 }
