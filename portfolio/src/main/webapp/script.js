@@ -12,20 +12,51 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-let map;
-const locationsDict = new Object();
-
+/**
+ * Class to hold all data needed to create a new location on the map.
+ */
 class Location {
-  constructor(marker, lat, lng, header, pitch, infoString, infoWindow) {
-    this.marker = marker;
+    /**
+   * @param {double} lat Latitude.
+   * @param {double} lng Longitude.
+   * @param {int} heading Camera rotation angle on the x-axis.
+   * @param {int} pitch Camera angle on the y-axis.
+   * @param {string} infoString String to be displayed in infoWindow.
+   */
+  constructor(lat, lng, heading, pitch, infoString) {
     this.lat = lat;
     this.lng = lng;
-    this.header = header;
+    this.heading = heading;
     this.pitch = pitch;
     this.infoString = infoString;
-    this.infoWindow = infoWindow;
   }
 }
+
+let map;
+const locationsDict = {
+  "Bean": new Location(
+    /* lat= */ 41.8826099,
+    /* lng= */ -87.6232902,
+    /* heading= */ -7,
+    /* pitch= */ 22,
+    /* infoString= */ '<p class="field-text marker">Cloud Gate</p>',
+  ),
+  "Skyline": new Location(
+    /* lat= */ 41.9147471,
+    /* lng= */ -87.6209924,
+    /* heading= */ 185,
+    /* pitch= */ 17,
+    /* infoString= */ '<p class="field-text marker">Photography Point</p>',
+  ),
+  "Riverwalk": new Location(
+    /* lat= */ 41.8877563,
+    /* lng= */ -87.6273952,
+    /* heading= */ 125,
+    /* pitch= */ 30,
+    /* infoString= */ '<p class="field-text marker">Chicago Riverwalk</p>',
+  )
+};
+
 
 /** Calls all necessary functions to be called onLoad */
 function initialize() {
@@ -40,51 +71,23 @@ function createMap() {
     zoom: 13,
   });
 
-  setupMarkers();
-  changeView(locationsDict["Bean"]);
+  initializeMarkersAndView();
 }
 
 /** All setup code for markers. */
-function setupMarkers() {
-  locationsDict["Bean"] = new Location(
-    null,
-    41.8826099,
-    -87.6232902,
-    -7,
-    22,
-    '<p style="margin-top:-3px; margin-bottom:-3px" class="field-text">Cloud Gate</p>',
-    null
-  );
-  locationsDict["Skyline"] = new Location(
-    null,
-    41.9147471,
-    -87.6209924,
-    185,
-    17,
-    '<p style="margin-top:-3px; margin-bottom:-3px" class="field-text">Photography Point</p>',
-    null
-  );
-  locationsDict["Riverwalk"] = new Location(
-    null,
-    41.8877563,
-    -87.6273952,
-    125,
-    30,
-    '<p style="margin-top:-3px; margin-bottom:-3px" class="field-text">Chicago Riverwalk</p>',
-    null
-  );
-
+function initializeMarkersAndView() {
   for (const location in locationsDict) {
-    locationsDict[location].marker = createMarker(locationsDict[location]);
-    locationsDict[location].infoWindow = new google.maps.InfoWindow({
+    marker = createMarker(locationsDict[location]);
+    infoWindow = new google.maps.InfoWindow({
       content: locationsDict[location].infoString,
     });
     addMarkerListeners(
-      locationsDict[location].marker,
+      marker,
       location,
-      locationsDict[location].infoWindow
+      infoWindow
     );
   }
+  changeView(locationsDict["Bean"]);
 }
 
 /** Add bounce animation and view listeners. */
@@ -113,7 +116,7 @@ function changeView(location) {
     {
       position: { lat: location.lat, lng: location.lng },
       pov: {
-        heading: location.header,
+        heading: location.heading,
         pitch: location.pitch,
       },
     }
@@ -141,7 +144,7 @@ async function loadComments() {
   const response = await fetch(`/list-comments?num-comments=${value}`);
   const comments = await response.json();
   const commentsDisplayed = document.getElementById("comment-list");
-  commentsDisplayed.innerHTML = "";
+  commentsDisplayed.innerHTML = '';
 
   comments.forEach((comment) => {
     commentsDisplayed.appendChild(createCommentElement(comment));
@@ -170,13 +173,14 @@ function createCommentElement(comment) {
 }
 
 /** Tells the server to delete the comment. */
-function deleteComment(comment) {
+async function deleteComment(comment) {
   const params = new URLSearchParams();
   params.append("id", comment.id);
-  fetch("/delete-comment", { method: "POST", body: params });
+  await fetch("/delete-comment", { method: "POST", body: params });
 }
 
-function deleteAllComments() {
-  fetch("delete-all-comments", { method: "POST" });
-  document.getElementById("comment-list").remove();
+async function deleteAllComments() {
+  await fetch("delete-all-comments", { method: "POST" });
+  const commentsDisplayed = document.getElementById("comment-list")
+  commentsDisplayed.innerHTML = '';
 }

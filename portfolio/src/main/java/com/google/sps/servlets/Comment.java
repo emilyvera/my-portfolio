@@ -30,20 +30,4 @@ public class Comment {
         this.message = message;
         this.timestamp = timestamp;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 }

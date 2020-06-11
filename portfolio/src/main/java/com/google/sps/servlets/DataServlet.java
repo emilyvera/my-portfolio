@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -39,19 +40,18 @@ public class DataServlet extends HttpServlet {
         String message = request.getParameter("message-input");
         long timestamp = System.currentTimeMillis();
 
-        // Error handling - don't allow empty or null values
-        if (name != null && email != null && subject != null && message != null) {
-            if (!name.isEmpty() && !email.isEmpty() && !subject.isEmpty() && !message.isEmpty()) {
-              Entity commentEntity = new Entity("Comment");
-              commentEntity.setProperty("name", name);
-              commentEntity.setProperty("email", email);
-              commentEntity.setProperty("subject", subject);
-              commentEntity.setProperty("message", message);
-              commentEntity.setProperty("timestamp", timestamp);
 
-              DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-              datastore.put(commentEntity);
-            }
+        // Error handling - don't allow empty or null values
+        if (!Strings.isNullOrEmpty(name) && !Strings.isNullOrEmpty(email) && !Strings.isNullOrEmpty(subject) && !Strings.isNullOrEmpty(message)) {
+            Entity commentEntity = new Entity("Comment");
+            commentEntity.setProperty("name", name);
+            commentEntity.setProperty("email", email);
+            commentEntity.setProperty("subject", subject);
+            commentEntity.setProperty("message", message);
+            commentEntity.setProperty("timestamp", timestamp);
+
+            DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+            datastore.put(commentEntity);
         }
 
         // Redirect back to the HTML page.

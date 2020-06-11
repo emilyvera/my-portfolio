@@ -44,7 +44,7 @@ public class ListDataServlet extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(numCommentsToDisplay));
-
+    
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results) {
         long id = entity.getKey().getId(); 
