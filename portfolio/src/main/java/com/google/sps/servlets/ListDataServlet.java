@@ -20,6 +20,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.sps.servlets.Comment;
@@ -40,11 +43,13 @@ public class ListDataServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int numCommentsToDisplay = getNumberOfComments(request);
 
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    Filter niceComments = new FilterPredicate("sentimentScore", FilterOperator.GREATER_THAN_OR_EQUAL, new Double(-0.5));
+    Query query = new Query("Comment").addSort("sentimentScore", SortDirection.DESCENDING);    
+    query.setFilter(niceComments);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(numCommentsToDisplay));
-    
+
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results) {
         long id = entity.getKey().getId(); 
@@ -53,8 +58,9 @@ public class ListDataServlet extends HttpServlet {
         String subject = (String) entity.getProperty("subject");
         String message = (String) entity.getProperty("message");
         long timestamp = (long) entity.getProperty("timestamp");
+        double sentimentScore = (double) entity.getProperty("sentimentScore");
 
-        Comment comment = new Comment(id, name, email, subject, message, timestamp);
+        Comment comment = new Comment(id, name, email, subject, message, timestamp, sentimentScore);
         comments.add(comment);
     }
 
