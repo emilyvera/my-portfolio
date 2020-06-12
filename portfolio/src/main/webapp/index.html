@@ -311,25 +311,24 @@
       </div>
     </div>
     <hr />
-
-    <label for="num-comments"
-      >Choose how many comments you'd like to display:</label
-    >
-
-    <select name="num-comments" id="num-comments" onchange="loadComments()">
-      <option value="0">0</option>
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="15">15</option>
-      <option value="20">20</option>
-    </select>
-
+    <div class="comments">
+      <label for="num-comments"
+        >Choose how many comments you'd like to display:</label
+      >
+      <select name="num-comments" id="num-comments" onchange="loadComments()">
+        <option value="0">0</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+    </div>
     <ul id="comment-list"></ul>
-
     <hr />
-
-    <button onclick="deleteAllComments()">
-      Delete all comments from datastore?
-    </button>
+    <div class="comments">
+      <button onclick="deleteAllComments()">
+        Delete all comments from datastore?
+      </button>
+    </div>
   </body>
 </html>

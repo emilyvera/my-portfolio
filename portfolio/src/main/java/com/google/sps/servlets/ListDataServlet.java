@@ -40,13 +40,13 @@ import javax.servlet.http.HttpServletResponse;
 public class ListDataServlet extends HttpServlet {
 
   // Only comments with sentiment score >= this value will be fetched and displayed.
-  private static double commentFilterThreshold = -0.5; 
+  private static double COMMENT_FILTER_THRESHOLD = -0.5; 
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int numCommentsToDisplay = getNumberOfComments(request);
 
-    Filter niceComments = new FilterPredicate("sentimentScore", FilterOperator.GREATER_THAN_OR_EQUAL, new Double(commentFilterThreshold));
+    Filter niceComments = new FilterPredicate("sentimentScore", FilterOperator.GREATER_THAN_OR_EQUAL, COMMENT_FILTER_THRESHOLD);
     Query query = new Query("Comment").addSort("sentimentScore", SortDirection.DESCENDING);    
     query.setFilter(niceComments);
 
@@ -55,16 +55,16 @@ public class ListDataServlet extends HttpServlet {
 
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results) {
-        long id = entity.getKey().getId(); 
-        String name = (String) entity.getProperty("name");
-        String email = (String) entity.getProperty("email");
-        String subject = (String) entity.getProperty("subject");
-        String message = (String) entity.getProperty("message");
-        long timestamp = (long) entity.getProperty("timestamp");
-        double sentimentScore = (double) entity.getProperty("sentimentScore");
+      long id = entity.getKey().getId(); 
+      String name = (String) entity.getProperty("name");
+      String email = (String) entity.getProperty("email");
+      String subject = (String) entity.getProperty("subject");
+      String message = (String) entity.getProperty("message");
+      long timestamp = (long) entity.getProperty("timestamp");
+      double sentimentScore = (double) entity.getProperty("sentimentScore");
 
-        Comment comment = new Comment(id, name, email, subject, message, timestamp, sentimentScore);
-        comments.add(comment);
+      Comment comment = new Comment(id, name, email, subject, message, timestamp, sentimentScore);
+      comments.add(comment);
     }
 
     Gson gson = new Gson();
@@ -79,10 +79,10 @@ public class ListDataServlet extends HttpServlet {
     // Convert the input to an int.
     int numComments;
     try {
-        numComments = Integer.parseInt(numCommentsString);
+      numComments = Integer.parseInt(numCommentsString);
     } catch (NumberFormatException e) {
-        System.err.println("Could not convert to int: " + numCommentsString);
-        numComments = 0; //default val
+      System.err.println("Could not convert to int: " + numCommentsString);
+      numComments = 0; //default val
     }
     return numComments;
   }
