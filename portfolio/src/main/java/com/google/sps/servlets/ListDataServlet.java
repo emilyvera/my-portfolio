@@ -39,11 +39,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/list-comments")
 public class ListDataServlet extends HttpServlet {
 
+  // Only comments with sentiment score >= this value will be fetched and displayed.
+  private static double commentFilterThreshold = -0.5; 
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int numCommentsToDisplay = getNumberOfComments(request);
 
-    Filter niceComments = new FilterPredicate("sentimentScore", FilterOperator.GREATER_THAN_OR_EQUAL, new Double(-0.5));
+    Filter niceComments = new FilterPredicate("sentimentScore", FilterOperator.GREATER_THAN_OR_EQUAL, new Double(commentFilterThreshold));
     Query query = new Query("Comment").addSort("sentimentScore", SortDirection.DESCENDING);    
     query.setFilter(niceComments);
 
