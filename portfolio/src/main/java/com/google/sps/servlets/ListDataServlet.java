@@ -20,6 +20,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.sps.servlets.Comment;
@@ -36,26 +39,32 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/list-comments")
 public class ListDataServlet extends HttpServlet {
 
+  // Only comments with sentiment score >= this value will be fetched and displayed.
+  private static double COMMENT_FILTER_THRESHOLD = -0.5; 
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     int numCommentsToDisplay = getNumberOfComments(request);
 
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    Filter niceComments = new FilterPredicate("sentimentScore", FilterOperator.GREATER_THAN_OR_EQUAL, COMMENT_FILTER_THRESHOLD);
+    Query query = new Query("Comment").addSort("sentimentScore", SortDirection.DESCENDING);    
+    query.setFilter(niceComments);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(numCommentsToDisplay));
-    
+
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results) {
-        long id = entity.getKey().getId(); 
-        String name = (String) entity.getProperty("name");
-        String email = (String) entity.getProperty("email");
-        String subject = (String) entity.getProperty("subject");
-        String message = (String) entity.getProperty("message");
-        long timestamp = (long) entity.getProperty("timestamp");
+      long id = entity.getKey().getId(); 
+      String name = (String) entity.getProperty("name");
+      String email = (String) entity.getProperty("email");
+      String subject = (String) entity.getProperty("subject");
+      String message = (String) entity.getProperty("message");
+      long timestamp = (long) entity.getProperty("timestamp");
+      double sentimentScore = (double) entity.getProperty("sentimentScore");
 
-        Comment comment = new Comment(id, name, email, subject, message, timestamp);
-        comments.add(comment);
+      Comment comment = new Comment(id, name, email, subject, message, timestamp, sentimentScore);
+      comments.add(comment);
     }
 
     Gson gson = new Gson();
@@ -70,10 +79,10 @@ public class ListDataServlet extends HttpServlet {
     // Convert the input to an int.
     int numComments;
     try {
-        numComments = Integer.parseInt(numCommentsString);
+      numComments = Integer.parseInt(numCommentsString);
     } catch (NumberFormatException e) {
-        System.err.println("Could not convert to int: " + numCommentsString);
-        numComments = 0; //default val
+      System.err.println("Could not convert to int: " + numCommentsString);
+      numComments = 0; //default val
     }
     return numComments;
   }

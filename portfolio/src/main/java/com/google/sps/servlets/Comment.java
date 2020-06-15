@@ -21,13 +21,15 @@ public class Comment {
     private String subject;
     private String message;
     private long timestamp;
+    private double sentimentScore;
 
-    public Comment(long id, String name, String email, String subject, String message, long timestamp) {
+    public Comment(long id, String name, String email, String subject, String message, long timestamp, double sentimentScore) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.subject = subject;
         this.message = message;
         this.timestamp = timestamp;
+        this.sentimentScore = sentimentScore;
     }
 }
