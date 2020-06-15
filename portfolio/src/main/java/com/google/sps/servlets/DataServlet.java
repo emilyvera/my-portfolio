@@ -43,9 +43,7 @@ public class DataServlet extends HttpServlet {
     String message = request.getParameter("message-input");
     long timestamp = System.currentTimeMillis();
 
-    LanguageServiceClient languageService = LanguageServiceClient.create();
-    double sentimentScore = getSentimentScore(message, languageService);
-    languageService.close();
+    double sentimentScore = getSentimentScore(message);
 
     // Error handling - don't allow empty or null values
     if (!Strings.isNullOrEmpty(name) && !Strings.isNullOrEmpty(email) && !Strings.isNullOrEmpty(subject) && !Strings.isNullOrEmpty(message)) {
@@ -65,10 +63,12 @@ public class DataServlet extends HttpServlet {
     response.sendRedirect("/index.html");
   }
 
-  double getSentimentScore(String message, LanguageServiceClient languageService) throws IOException {
+  private double getSentimentScore(String message) throws IOException {
     Document doc = Document.newBuilder().setContent(message).setType(Document.Type.PLAIN_TEXT).build();
-		Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
-		double sentimentScore = (double) sentiment.getScore();
+	LanguageServiceClient languageService = LanguageServiceClient.create();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+	double sentimentScore = (double) sentiment.getScore();
+    languageService.close();
     return sentimentScore;
   }
 }
