@@ -50,4 +50,14 @@ public final class GreeterTest {
     // Symbols should be removed
     Assert.assertEquals("Hello Ada", greeting);
   }
+
+  @Test
+  public void testGreetingKeepsMiddleSpace() {
+    Greeter greeter = new Greeter();
+
+    String greeting = greeter.greet("Ada Lovelace");
+
+    // Should keep middle space
+    Assert.assertEquals("Hello Ada Lovelace", greeting);
+  }
 }

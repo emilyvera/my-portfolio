@@ -291,9 +291,8 @@ public final class FindMeetingQueryTest {
         new Event("Event 3", TimeRange.fromStartDuration(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY),
             Arrays.asList(PERSON_C)));
             
-        MeetingRequest request =
-        new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
-        request.addOptionalAttendee(PERSON_C);
+    MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
+    request.addOptionalAttendee(PERSON_C);
 
     Collection<TimeRange> actual = query.query(events, request);
     Collection<TimeRange> expected =
@@ -321,9 +320,8 @@ public final class FindMeetingQueryTest {
         new Event("Event 3", TimeRange.fromStartDuration(TIME_0830AM, DURATION_30_MINUTES),
             Arrays.asList(PERSON_C)));
             
-        MeetingRequest request =
-        new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
-        request.addOptionalAttendee(PERSON_C);
+    MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
+    request.addOptionalAttendee(PERSON_C);
 
     Collection<TimeRange> actual = query.query(events, request);
     Collection<TimeRange> expected =
@@ -362,6 +360,13 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void allOptionalAttendeesWithGaps() {
+    // Have only optional attendees with gaps in their schedules. These gaps should be returned.
+    //
+    // Events  :    |-A-|       |-A-|
+    //         :          |-B-|
+    // Day     : |---------------------|
+    // Options :       |-----|
+
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_30_MINUTES),
             Arrays.asList(PERSON_A)),
@@ -370,8 +375,7 @@ public final class FindMeetingQueryTest {
         new Event("Event 3", TimeRange.fromStartDuration(TIME_1000AM, DURATION_30_MINUTES),
             Arrays.asList(PERSON_A)));
 
-    MeetingRequest request =
-        new MeetingRequest(Arrays.asList(), DURATION_30_MINUTES);
+    MeetingRequest request = new MeetingRequest(Arrays.asList(), DURATION_30_MINUTES);
     request.addOptionalAttendee(PERSON_A);
     request.addOptionalAttendee(PERSON_B);
 
@@ -387,14 +391,20 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void allOptionalAttendeesWithNoGaps() {
+    // Have only optional attendees with no gaps in their schedules. No TimeRanges should be returned.
+    //
+    // Events  : |----------A----------|       
+    //         : |----------B----------|  
+    // Day     : |---------------------|
+    // Options :       |-----|
+
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY),
             Arrays.asList(PERSON_A)),
         new Event("Event 2", TimeRange.fromStartDuration(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY),
             Arrays.asList(PERSON_B)));
 
-    MeetingRequest request =
-        new MeetingRequest(Arrays.asList(), DURATION_30_MINUTES);
+    MeetingRequest request = new MeetingRequest(Arrays.asList(), DURATION_30_MINUTES);
     request.addOptionalAttendee(PERSON_A);
     request.addOptionalAttendee(PERSON_B);
 
