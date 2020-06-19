@@ -15,12 +15,10 @@
 package com.google.sps;
 
 import com.google.common.collect.ImmutableList;
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.google.common.collect.Iterables;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+
 
 public final class FindMeetingQuery {
 
@@ -56,19 +54,11 @@ public final class FindMeetingQuery {
    * Check all events for the day and add TimeRanges of events with our mandatory attendees.
   */
   private ImmutableList<TimeRange> findBusyRanges(Collection<String> attendees, Collection<Event> events) {
-    ArrayList<TimeRange> busyRanges = new ArrayList<>();
-    for (Event event : events) {
-        // Checks if we have any overlap of attendees
-        if (!Collections.disjoint(attendees, event.getAttendees())) {
-            busyRanges.add(event.getWhen());
-        }
-    }
-
-    Collections.sort(busyRanges, TimeRange.ORDER_BY_START);
-
-    return ImmutableList.<TimeRange>builder() 
-              .addAll(busyRanges) 
-              .build();
+    return events.stream()
+        .filter(event -> !Collections.disjoint(attendees, event.getAttendees()))
+        .map(Event::getWhen)
+        .sorted(TimeRange.ORDER_BY_START)
+        .collect(ImmutableList.toImmutableList());
   }
 
   /** 
@@ -76,7 +66,7 @@ public final class FindMeetingQuery {
    * Finds free TimeRanges in between sorted, busy TimeRanges and takes duration into account.
   */
   private ImmutableList<TimeRange> findFreeRanges(MeetingRequest request, ImmutableList<TimeRange> sortedBusyRanges) {
-    ArrayList<TimeRange> freeRanges = new ArrayList<>();
+    ImmutableList.Builder<TimeRange> freeRanges = ImmutableList.builder();
 
     int startFreeRange = TimeRange.START_OF_DAY;
 
@@ -98,9 +88,7 @@ public final class FindMeetingQuery {
       freeRanges.add(TimeRange.fromStartEnd(startFreeRange, TimeRange.END_OF_DAY, true));
     }
 
-    return ImmutableList.<TimeRange>builder() 
-              .addAll(freeRanges) 
-              .build();
+    return freeRanges.build();
   }
 
   /** 
@@ -110,15 +98,10 @@ public final class FindMeetingQuery {
   */
   private ImmutableList<TimeRange> findFreeRangesAllAttendees(ImmutableList<TimeRange> sortedBusyRangesForMandatoryAttendees, Collection<Event> events, MeetingRequest request) {
     ImmutableList<TimeRange> sortedBusyRangesForOptionalAttendees = findBusyRanges(request.getOptionalAttendees(), events);
-      
-    ArrayList<TimeRange> busyRangesForAllAttendees = new ArrayList<>();
-    busyRangesForAllAttendees.addAll(sortedBusyRangesForMandatoryAttendees);
-    busyRangesForAllAttendees.addAll(sortedBusyRangesForOptionalAttendees);
-    Collections.sort(busyRangesForAllAttendees, TimeRange.ORDER_BY_START);
-    ImmutableList<TimeRange> immutableBusyRangesForAllAttendees = ImmutableList.<TimeRange>builder() 
-              .addAll(busyRangesForAllAttendees) 
-              .build();
-    ImmutableList<TimeRange> freeRangesForAllAttendees = findFreeRanges(request, immutableBusyRangesForAllAttendees);
+
+    ImmutableList busyRangesForAllAttendees = ImmutableList.sortedCopyOf(TimeRange.ORDER_BY_START, 
+          Iterables.concat(sortedBusyRangesForMandatoryAttendees, sortedBusyRangesForOptionalAttendees));
+    ImmutableList<TimeRange> freeRangesForAllAttendees = findFreeRanges(request, busyRangesForAllAttendees);
 
     return freeRangesForAllAttendees;
   }
