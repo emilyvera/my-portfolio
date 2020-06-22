@@ -27,10 +27,9 @@ public final class FindMeetingQuery {
   */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
-    // Find which times work for mandatory attendees
+    // Find which times don't work for mandatory attendees
     ImmutableList<TimeRange> sortedBusyRangesForMandatoryAttendees = findBusyRanges(request.getAttendees(), events);
-    ImmutableList<TimeRange> freeRangesForMandatoryAttendees = findFreeRanges(request, sortedBusyRangesForMandatoryAttendees);
-    
+
     // Factor in optional attendees if there are any
     if (!request.getOptionalAttendees().isEmpty()) {
       ImmutableList<TimeRange> freeRangesForAllAttendees = findFreeRangesAllAttendees(sortedBusyRangesForMandatoryAttendees, events, request);
@@ -46,11 +45,14 @@ public final class FindMeetingQuery {
       }
     }
 
+    // Find which times work for mandatory attendees only, since no times worked for optional attendees
+    ImmutableList<TimeRange> freeRangesForMandatoryAttendees = findFreeRanges(request, sortedBusyRangesForMandatoryAttendees); 
+
     return freeRangesForMandatoryAttendees;
   }
 
   /** 
-   * Returns an ImmutableList of all busy TimeRanges.
+   * Returns an ImmutableList of all busy TimeRanges sorted by start time.
    * Check all events for the day and add TimeRanges of events with our mandatory attendees.
   */
   private ImmutableList<TimeRange> findBusyRanges(Collection<String> attendees, Collection<Event> events) {
@@ -79,7 +81,7 @@ public final class FindMeetingQuery {
         freeRanges.add(TimeRange.fromStartEnd(startFreeRange, endFreeRange, false));
       }
       
-      // Handles over lapping cases
+      // Handles overlapping cases
       startFreeRange = Math.max(startFreeRange, sortedBusyRange.end());       
     } 
 
